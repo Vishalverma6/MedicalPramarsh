@@ -9,7 +9,7 @@ router.get("/get-pending-expert",auth,isAdmin,getPendingExpert);
 
 
 // Routes to Approved Experts
-router.post("/approve-expert/:expertId",auth,isAdmin,approveExpert);
+router.post("/approve-expert",auth,isAdmin,approveExpert);
 
 
 

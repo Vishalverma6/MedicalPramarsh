@@ -18,7 +18,7 @@ router.get("/get-report-by-reportId/:reportId",getReportById);
 router.get("/get-report-by-patientId/:patientId",getReportsByPatient);
 
 // routes to get report reviewed by experts 
-router.get("/get-report-by-expertId/:expertId",getReportsByExpert);
+router.get("/get-report-by-expertId",auth,isAdminOrExpert,getReportsByExpert);
 
 // routes to add review in report
 router.post("/add-review/:reportId",auth,isExpert,addReviewToReport);

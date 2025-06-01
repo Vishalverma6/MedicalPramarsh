@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import Sidebar from '../components/core/dashboard/Sidebar';
 import { GiHamburgerMenu } from "react-icons/gi";
+import bgImage from "../assets/bg-dashboard.jpg"
 
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -36,8 +37,11 @@ const Dashboard = () => {
       )}
 
       {/* Main Content */}
-      <div className='h-[calc(100vh-3.5rem)] w-full overflow-auto'>
-        <div className='mx-auto w-11/12 py-10 flex'>
+      <div className='relative h-[calc(100vh-3.5rem)] w-full  overflow-auto'>
+        <img src={bgImage} 
+        className='opacity-10 '/>
+        <div className='mx-auto w-11/12  py-10 flex flex-col absolute ml-10 -mt-[700px]'>
+        
           <Outlet />
         </div>
       </div>

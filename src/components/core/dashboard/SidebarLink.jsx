@@ -3,7 +3,7 @@ import * as Icons from "react-icons/vsc";
 import { useSelector } from "react-redux";
 import { NavLink, useLocation, matchPath } from "react-router-dom";
 
-const SidebarLink = ({ link, iconName }) => {
+const SidebarLink = ({ link, iconName ,setIsSidebarOpen}) => {
   const {user} = useSelector((state)=> state.profile);
   const patientId = user?._id
   const Icon = Icons[iconName];
@@ -34,6 +34,10 @@ const SidebarLink = ({ link, iconName }) => {
     }
   }, [location.pathname]);
 
+  const clickHandler =() => {
+    setIsSidebarOpen(false);
+  }
+
   return (
     <div className="w-full">
 
@@ -53,6 +57,7 @@ const SidebarLink = ({ link, iconName }) => {
       ) : (
         <NavLink
           to={link.path}
+          onClick={clickHandler}
           className={`relative px-8 py-2 text-sm font-medium flex items-center gap-x-2
             ${matchRoute(link.path) ? "bg-yellow-950 text-yellow-300" : "text-gray-500"}`}
         >
@@ -71,6 +76,7 @@ const SidebarLink = ({ link, iconName }) => {
           {link.children.map((child) => (
             <NavLink
               key={child.id}
+              onClick={clickHandler}
               to={child.path.replace(":patientId", patientId)}
               className={`px-4 py-1 text-sm cursor-pointer rounded-md
                 ${matchRoute(child.path)

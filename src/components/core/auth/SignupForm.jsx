@@ -22,6 +22,7 @@ const SignupForm = () => {
     password: "",
     confirmPassword: "",
     contactNumber: "",
+    // notificationPreference: "",
   });
 
 
@@ -35,7 +36,7 @@ const SignupForm = () => {
   }
   const submitHandler = (event) => {
     event.preventDefault();
-    if(formData.password !== formData.confirmPassword){
+    if (formData.password !== formData.confirmPassword) {
       console.log("password do not match");
       toast.error("Password do not matched")
       return
@@ -45,7 +46,7 @@ const SignupForm = () => {
       ...formData
     };
 
-    const finalData ={
+    const finalData = {
       ...signupData,
       accountType,
     }
@@ -55,15 +56,16 @@ const SignupForm = () => {
 
     // for otp verification
     dispatch(sendOtp(formData.email, navigate))
-    
+
     // reset form data 
     setFormData({
-      firstName:"",
-      lastName:"",
-      email:"",
-      password:"",
-      confirmPassword:"",
-      contactNumber:"",
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      contactNumber: "",
+      // notificationPreference: "email",
     });
 
     setAccountType(ACCOUNT_TYPE.STUDENT);
@@ -148,7 +150,7 @@ const SignupForm = () => {
               <select
                 id="country-code"
                 name="country-code"
-                className="border border-gray-300 rounded-md p-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="border className='cursor-pointer' border-gray-300 rounded-md p-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                 defaultValue="+91"
               >
                 <option value="+91">+91 (India)</option>
@@ -197,6 +199,7 @@ const SignupForm = () => {
               )}
             </span>
           </label>
+
           <label className="flex-1 relative mt-4 md:mt-0">
             <p className="text-sm font-medium text-gray-700 mb-1">
               Confirm Password <sup className="text-red-500">*</sup>
@@ -223,10 +226,32 @@ const SignupForm = () => {
           </label>
         </div>
 
+        {/* Notification prefernce  */}
+        {/* {accountType === ACCOUNT_TYPE?.EXPERT && (
+          <div className="text-sm font-medium text-gray-700 mb-1">
+            <label>
+              <p>
+                Notification Preference <sup className='text-red-500'></sup>
+              </p>
+              <select
+                name='notificationPreference'
+                value={formData.notificationPreference}
+                onChange={changeHandler}
+                className='w-full cursor-pointer rounded-[0.5rem] bg-white p-[8px] border-b-2 focus:outline-none focus:ring-2 focus:ring-blue-500'
+                required
+              >
+                <option value="email">Email</option>
+                <option value="sms">SMS</option>
+                <option value="whatsapp">WhatsApp</option>
+              </select>
+            </label>
+          </div>
+        )} */}
+
         {/* Create Account Button */}
         <button
           type="submit"
-          className="w-full cursor-pointer bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition duration-200"
+          className="w-full mt-6 cursor-pointer bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition duration-200"
         >
           Create Account
         </button>

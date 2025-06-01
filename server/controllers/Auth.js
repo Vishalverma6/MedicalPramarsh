@@ -48,7 +48,7 @@ exports.sendOTP = async (req, res) => {
 
         // create an entry for OTP in database
         const otpBody = await OTP.create(otpPayload);
-        console.log("otpbody",otpBody);
+        console.log("otpbody", otpBody);
 
         // return response 
         return res.status(200).json({
@@ -79,6 +79,7 @@ exports.signup = async (req, res) => {
             accountType,
             contactNumber,
             otp,
+            // notificationPreference,
         } = req.body;
 
         // validation
@@ -89,6 +90,13 @@ exports.signup = async (req, res) => {
                 message: "All fields are Required",
             })
         }
+
+        // if (accountType === "Expert" && typeof notificationPreference === "undefined") {
+        //     return res.status(400).json({
+        //         success: false,
+        //         message: "Notification preference is required for experts.",
+        //     });
+        // }
 
         // password matching 
         if (password !== confirmPassword) {
@@ -147,6 +155,7 @@ exports.signup = async (req, res) => {
             password: hashedPassword,
             contactNumber,
             accountType,
+            // notificationPreference:accountType === "Expert" ? notificationPreference : undefined,
             approved: accountType === "Expert" ? false : true,
             additionalDetails: profileDetails._id,
             image: `https://api.dicebear.com/5.x/initials/svg?seed=${firstName}${lastName}`
@@ -155,9 +164,9 @@ exports.signup = async (req, res) => {
         // return response 
         return res.status(200).json({
             success: true,
-            message: accountType === "Expert" 
-            ?"Signup Successfull. Wait for the Admin approval"
-            :"Signup Successful, Please Login",
+            message: accountType === "Expert"
+                ? "Signup Successfull. Wait for the Admin approval"
+                : "Signup Successful, Please Login",
             data: user,
         });
     } catch (error) {
@@ -277,8 +286,8 @@ exports.changePassword = async (req, res) => {
 
         // send email - password updated
         const emailresponse = await mailSender(user.email,
-             "Password Updated",
-              passwordUpdated(user.email,user.firstName,user.lastName));
+            "Password Updated",
+            passwordUpdated(user.email, user.firstName, user.lastName));
         console.log("Email-password updated", emailresponse);
 
         // return response 

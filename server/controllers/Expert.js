@@ -1,4 +1,6 @@
-const User = require("../models/User")
+const expertApprovedTemplate = require("../mail/templates/expertApprovedTemplate");
+const User = require("../models/User");
+const mailSender = require("../utils/mailSender");
 
 
 exports.getPendingExpert = async (req, res) => {
@@ -25,32 +27,38 @@ exports.getPendingExpert = async (req, res) => {
 exports.approveExpert = async (req, res) => {
     try {
         // fetch the expert id 
-        const { expertId } = req.params;
+        const { expertId } = req.body;
 
         // find expert details
-        const user = await User.findById(expertId);
+        const expert = await User.findById(expertId);
 
         // validate
-        if (!user) {
+        if (!expert) {
             return res.status(404).json({
                 success: false,
                 message: "User Not found",
             });
         }
 
-        if (user.accountType !== "Expert") {
+        if (expert.accountType !== "Expert") {
             return res.status(400).json({
                 success: false,
                 message: "User is not an expert",
             });
         }
 
-        user.approved = true;
-        await user.save();
+        expert.approved = true;
+        await expert.save();
+
+        // send the email to expert about access of their account 
+        const emailResponse = await mailSender(expert?.email,
+            "Account Approved",
+            expertApprovedTemplate(expert?.firstName, expert?.lastName)
+        );
 
         // return response 
         return res.status(200).json({
-            success: false,
+            success: true,
             message: "Expert approved Successfully",
         });
 

@@ -4,25 +4,26 @@ import medicalImage2 from "../assets/medicalImage2.svg"
 import medicalImage3 from "../assets/Laboratory-amico.svg"
 import medicalImage4 from "../assets/Medical care-amico.svg"
 import Footer from '../components/common/Footer';
+import medicalImage5 from "../assets/medicalConcern.svg"
 
 
 const Home = () => {
     return (
-        <div className='w-full mt-6'>
+        <div className='w-full mt-6 overflow-x-hidden'>
             {/* section 1  */}
             <section className="w-full  bg-gradient-to-r from-blue-50  py-16 px-6">
                 <div className="w-[90%] relative">
 
-                    <div className='flex flex-col opacity-50 md:flex-row justify-between w-full border border-gray-300 px-4 rounded-md'>
+                    <div className='flex flex-col opacity-50 md:flex-row justify-between  w-full border border-gray-300 px-4 rounded-md'>
                         <img
                             src={medicalImage}
                             alt="Healthcare Illustration"
-                            className=" mb-8 w-full max-w-md"
+                            className=" mb-8 w-full shadow-2xl shadow-sky-300 max-w-md"
                         />
                         <img
                             src={medicalImage2}
                             alt="Healthcare Illustration2"
-                            className=" mb-8 w-full max-w-md"
+                            className=" mb-8 w-full max-w-md shadow-2xl shadow-gray-300"
                         />
                     </div>
                     <div className="absolute inset-0 flex items-center justify-center opacity-85 -mt-24 w-full">
@@ -46,12 +47,39 @@ const Home = () => {
                                 Submit Report
                             </a>
                             <a
-                                href="/register-expert"
+                                href="/signup"
                                 className="border border-blue-600 text-blue-600 hover:bg-blue-50 px-6 py-3 rounded-xl shadow-sm transition-all"
                             >
                                 Join as Expert
                             </a>
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            <section className="relative bg-gradient-to-r from-white to-blue-50 py-16 px-6 text-gray-800 font-sans mt-10">
+                <div className="flex flex-col-reverse md:flex-row justify-between items-center w-full px-4 rounded-md">
+                    {/* Text Content */}
+                    <div className="w-full md:w-1/2 mt-8 md:mt-0 opacity-70">
+                        <div className="bg-white bg-opacity-70 rounded-2xl p-8">
+                            <h1 className="text-4xl font-bold text-gray-900 mb-4">Have a Query or Concern?</h1>
+                            <p className="text-lg mb-6">
+                                Our expert will call you to assist with any medical questions or concerns you may have.
+                            </p>
+                            <p className="text-lg mb-6">
+                                We provide a seamless, secure, and efficient consultation experience. Connect with certified doctors,
+                                share reports digitally, and receive professional guidance — all from the comfort of your home.
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* Right-Aligned Image */}
+                    <div className="w-full md:w-1/2 mb-8 md:mb-0 flex justify-center">
+                        <img
+                            src={medicalImage5}
+                            alt="Medical Consultation"
+                            className="w-full max-w-lg rounded-lg"
+                        />
                     </div>
                 </div>
             </section>
@@ -62,7 +90,7 @@ const Home = () => {
                     <img
                         src={medicalImage3}
                         alt="Healthcare Illustration"
-                        className=" mb-8 w-full max-w-md"
+                        className=" mb-8 w-full max-w-md shadow-2xl shadow-blue-300"
                     />
 
                 </div>
@@ -87,11 +115,11 @@ const Home = () => {
 
             {/* section 3 Benefits  */}
             <section class=" relative max-w-6xl bg-gradient-to-b from-white to-blue-100 mb-10 mx-auto px-4 z-30 py-24">
-                    <img 
-                        src={medicalImage4}
-                        alt="Healthcare Illustration"
-                        className=" mb-8 w-full max-w-md absolute -z-10 ml-60"
-                    />
+                <img
+                    src={medicalImage4}
+                    alt="Healthcare Illustration"
+                    className=" mb-8 w-full max-w-md absolute -z-10 ml-60"
+                />
                 <h2 class="text-3xl font-bold text-center text-blue-700 mb-10">Benefits</h2>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 opacity-90">
@@ -130,8 +158,8 @@ const Home = () => {
             </section>
 
             {/* footer */}
-            <Footer/>
-        </div>
+            <Footer />
+        </div >
     )
 }
 

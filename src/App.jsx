@@ -24,8 +24,16 @@ import PreviousReport from './components/core/report/PreviousReport'
 import ReportSubmittedMessage from './components/core/report/ReportSubmittedMessage'
 import ContactUs from './pages/ContactUs'
 import AboutUs from './pages/AboutUs'
+import PendingExpert from './components/core/expert/PendingExpert'
+import { useSelector } from 'react-redux'
+import { ACCOUNT_TYPE } from './utils/constants'
+import PendingReport from './components/core/report/PendingReport'
+import AddReview from './components/core/report/AddReview'
+import ReviewedReport from './components/core/report/ReviewedReport'
 
 function App() {
+  const { user } = useSelector((state) => state.profile);
+
 
   return (
     <>
@@ -95,21 +103,44 @@ function App() {
               </PrivateRoute>
             }
           >
-            <Route path='/dashboard/home' element = {<DashboardHome/>}/>
+            <Route path='/dashboard/home' element={<DashboardHome />} />
             <Route path='/dashboard/my-profile' element={<MyProfile />} />
 
-            <Route path='/dashboard/settings' element={<Setting/>}/>
-            
+            <Route path='/dashboard/settings' element={<Setting />} />
 
-            <Route path='/dashboard/upload-report' element = {<UploadReport/>}/>
-            <Route path='/dashboard/previous-report/:patientId' element={<PreviousReport/>} />
-            <Route path='/report-submitted' element={<ReportSubmittedMessage/>}/>
+
+            <Route path='/dashboard/upload-report' element={<UploadReport />} />
+            <Route path='/dashboard/previous-report/:patientId' element={<PreviousReport />} />
+            <Route path='/report-submitted' element={<ReportSubmittedMessage />} />
+
+            {
+              user?.accountType === ACCOUNT_TYPE?.ADMIN && (
+                <Route path='/dashboard/pending-expert' element={<PendingExpert />} />
+              )
+            }
+
+            {
+              user?.accountType === ACCOUNT_TYPE?.EXPERT && (
+                <Route path='/dashboard/add-review/:reportId' element={<AddReview />} />
+              )
+            }
+
+            {
+              (user?.accountType === ACCOUNT_TYPE?.ADMIN || user?.accountType === ACCOUNT_TYPE?.EXPERT) && (
+                <>
+                  <Route path='/dashboard/pending-report' element={<PendingReport />} />
+                  <Route path='/dashboard/previous-reviewed-report' element={<ReviewedReport />} />
+                </>
+
+              )
+            }
+
 
           </Route>
 
 
-          <Route path='/about-us' element={<AboutUs/>}/>
-          <Route path='/contact-us' element={<ContactUs/>}/>
+          <Route path='/about-us' element={<AboutUs />} />
+          <Route path='/contact-us' element={<ContactUs />} />
           <Route path='*' element={<Error />} />
         </Routes>
       </div>

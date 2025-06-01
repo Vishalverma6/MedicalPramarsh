@@ -1,8 +1,9 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import IconBtn from '../../common/IconBtn';
+
 import { FaRegEdit } from 'react-icons/fa';
+import IconBtn from '../../common/iconBtn';
 
 const MyProfile = () => {
   const { user } = useSelector((state) => state.profile);

@@ -26,9 +26,17 @@ const userSchema = new mongoose.Schema({
         enum: ["Admin", "Expert", "Patient"],
         required: true,
     },
-    approved:{
-        type:Boolean,
-        default:false,
+    approved: {
+        type: Boolean,
+        default: false,
+    },
+    notificationPreference: {
+        type: String,
+        enum: ["email", "sms", "whatsapp"],
+        default: "email",
+        required: function () {
+            return this.accountType === "Expert";
+        },
     },
     additionalDetails: {
         type: mongoose.Schema.Types.ObjectId,
@@ -38,21 +46,21 @@ const userSchema = new mongoose.Schema({
     resetPasswordExpires: {
         type: Date,
     },
-    contactNumber:{
-        type:String,
-        required:true,
+    contactNumber: {
+        type: String,
+        required: true,
     },
-    image:{
-        type:String,
-        required:true,
+    image: {
+        type: String,
+        required: true,
     },
-    token:{
-        type:String,
+    token: {
+        type: String,
     },
-    reports:[
+    reports: [
         {
-            type:mongoose.Schema.Types.ObjectId,
-            ref:"Report",
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Report",
         }
     ]
 

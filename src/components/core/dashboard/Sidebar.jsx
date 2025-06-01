@@ -42,7 +42,9 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
             {sidebarLinks.map((link) => {
               if (link.type && user.accountType !== link.type) return null;
               return (
-                <SidebarLink key={link?.id} link={link} iconName={link?.icon} />
+                <SidebarLink key={link?.id} link={link} 
+                 setIsSidebarOpen = {setIsSidebarOpen}
+                iconName={link?.icon} />
               );
             })}
           </div>

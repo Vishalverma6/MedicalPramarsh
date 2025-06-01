@@ -1,7 +1,12 @@
+const reportReviewedTemplate = require("../mail/templates/reportReviewedTemplate");
+const reportUploadedTemplate = require("../mail/templates/reportUploadedTemplate");
 const Report = require("../models/Report");
 const User = require("../models/User");
 const { report } = require("../routes/User");
 const { uploadImageToCloudinary } = require("../utils/imageUploader");
+const mailSender = require("../utils/mailSender");
+const sendWhatsAppTemplateMessage = require("../utils/sendWhatsAppTemplateMessage");
+
 require("dotenv").config();
 
 
@@ -52,6 +57,32 @@ exports.submitReport = async (req, res) => {
             },
             { new: true },
         )
+
+        // sending  notification
+         const doctors =  await User.find({accountType:"Expert"});
+
+         if(!doctors){
+            return res.status(404).json({
+                success:false,
+                message:"User not found with accountType Expert"
+            });
+         }
+
+        //  loop through each doctor and send notification
+        doctors.forEach((doctor) => {
+            if(doctor.notificationPreference === "email"){
+                mailSender(doctor?.email,
+                    "A New Report Uploaded",
+                    reportUploadedTemplate(doctor.firstName, doctor.lastName, reportType)
+                )
+            }
+           
+            else if(doctor.notificationPreference === "whatsapp"){
+                 console.log("contactNumber",doctor.contactNumber);
+                sendWhatsAppTemplateMessage(doctor.contactNumber)
+            }
+        });
+
 
         // return response 
         return res.status(200).json({
@@ -117,7 +148,7 @@ exports.getReportById = async (req, res) => {
 // get Reports by patient  Id
 exports.getReportsByPatient = async (req, res) => {
     try {
-        const {patientId} = req?.params;
+        const { patientId } = req?.params;
         // console.log("patient id3 ", patientId)
         const reports = await Report.find({ patient: patientId })
             .populate("expert", "name email");
@@ -125,7 +156,7 @@ exports.getReportsByPatient = async (req, res) => {
         // return response 
         return res.status(200).json({
             success: true,
-            data:reports,
+            data: reports,
         });
     } catch (error) {
         console.error(error);
@@ -136,13 +167,24 @@ exports.getReportsByPatient = async (req, res) => {
 // get reports by experts
 exports.getReportsByExpert = async (req, res) => {
     try {
-        const { expertId } = req.params
+        console.log("user", req.user);
+        const expertId  = req.user.id;
+        console.log("expert",expertId)
 
-        const reports = await Report.find({ expert: expertId }).populate("patient", "name email");
+        if (!expertId) {
+            return res.status(404).json({
+                success: false,
+                message: "ExpertId is required"
+            });
+        }
+
+
+        const reports = await Report.find({ expert: expertId })
+         .populate("patient", "name email");
 
         return res.status(200).json({
             success: true,
-            reports,
+            data:reports,
         });
     } catch (error) {
         console.error(error);
@@ -164,11 +206,13 @@ exports.addReviewToReport = async (req, res) => {
             reportId,
             {
                 review,
-                status: "Reviewed"
+                status: "Reviewed",
+                expert:id,
             },
             { new: true }
-        ).populate("patient expert", "name email");
+        ).populate("patient expert", "firstName lastName email");
 
+        console.log("report Details ", report);
 
         // validate 
         if (!report) {
@@ -178,16 +222,23 @@ exports.addReviewToReport = async (req, res) => {
             });
         }
 
-        // add the reviewd report to expert schema 
-        await User.findByIdAndUpdate(
-            { _id: id },
-            {
-                $push: {
-                    reports: reportId,
-                }
-            },
-            { new: true },
-        )
+        // // add the reviewd report to expert schema 
+        // await User.findByIdAndUpdate(
+        //     { _id: id },
+        //     {
+        //         $push: {
+        //             reports: reportId,
+        //         }
+        //     },
+        //     { new: true },
+        // )
+
+        // send email response 
+        const emailResponse = await mailSender(report?.patient?.email,
+            "Report Reviewed",
+            reportReviewedTemplate(report?.patient?.firstName, report?.patient?.lastName)
+        ) ;
+
 
 
         // return response 
@@ -229,7 +280,7 @@ exports.deleteReports = async (req, res) => {
     try {
         // fetch reportId from req body
         console.log("req body", req.body)
-        const reportId  = req?.body?.reportId;
+        const reportId = req?.body?.reportId;
         console.log("reportId", reportId);
 
         const report = await Report.findById(reportId);
