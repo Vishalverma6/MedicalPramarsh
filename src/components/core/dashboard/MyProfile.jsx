@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { FaRegEdit } from 'react-icons/fa';
-import IconBtn from '../../common/iconBtn';
+import IconBtn from '../../common/IconBtn';
 
 const MyProfile = () => {
   const { user } = useSelector((state) => state.profile);
