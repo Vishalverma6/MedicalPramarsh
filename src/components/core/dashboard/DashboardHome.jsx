@@ -10,7 +10,7 @@ const DashboardHome = () => {
   console.log("user22", user)
 
   return (
-    <div className="p-6 text-center">
+    <div className="p-6 text-center ">
       {/* <img src={bgImage}/> */}
       <h1 className="text-3xl font-bold text-blue-800 mb-4">
         Welcome to Medical Pramarsh
