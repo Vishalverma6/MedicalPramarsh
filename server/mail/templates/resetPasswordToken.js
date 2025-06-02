@@ -70,7 +70,7 @@ exports.resetPasswordLink = (firstName, lastName, url) => {
 
     <body>
         <div class="container">
-           <a href="https://medicalpramarsh"><img class="logo"
+           <a href="https://medicalpramarsh.com"><img class="logo"
            src="" alt="Medical Pramarsh Logo">  
            </a>
            <div class="name">Medical Pramarsh</div>

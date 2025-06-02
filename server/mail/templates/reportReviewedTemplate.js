@@ -79,7 +79,7 @@ const reportReviewedTemplate = (firstName, lastName) => {
                 <p>
                     If needed, the expert may also call you for further discussion. Please stay available; they will reach out to you when they are free.
                 </p>
-               <a href="http://localhost:5173/dashboard/home" class="cta">Go to Dashboard</a>
+               <a href="https://medicalpramarsh.com/dashboard/home" class="cta">Go to Dashboard</a>
                 <p>Thank you for choosing <strong>Medical Pramarsh</strong>. We care about your health.</p>
             </div>
             <div class="support">

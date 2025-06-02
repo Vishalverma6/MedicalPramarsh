@@ -36,7 +36,7 @@ exports.resetPasswordToken = async (req, res) => {
         );
 
         // create url
-        const url = `http://localhost:5173/update-password/${token}`;
+        const url = `https://medicalpramarsh.com/update-password/${token}`;
 
         // send email containing the url
         await mailSender(email,

@@ -3,7 +3,7 @@ import { BiArrowBack } from 'react-icons/bi';
 import OTPInput from 'react-otp-input';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { signup } from '../services/operations/authAPI';
+import { sendOtp, signup } from '../services/operations/authAPI';
 
 const VerifyEmail = () => {
     const [otp, setOtp] = useState("");
@@ -76,7 +76,9 @@ const VerifyEmail = () => {
 
                             <div className='flex justify-between'>
                                 <div className="mt-6 flex items-center justify-between">
-                                    <Link>
+                                    <Link 
+                                     onClick={navigate("/login")}
+                                    >
                                         <p className='flex items-center gap-x-2 text-black font-semibold'>
                                             <BiArrowBack />
                                             Back to Login
@@ -85,7 +87,7 @@ const VerifyEmail = () => {
                                 </div>
                                 <button
                                     className='flex items-center text-sky-900 font-semibold cursor-pointer hover:text-sky-950  gap-x-2 mt-6'
-                                // onClick={() => dispatch(sendOtp(signupData.email, navigate))} 
+                                onClick={() => dispatch(sendOtp(signupData.email, navigate))} 
                                 >
                                     Resend it
                                 </button>

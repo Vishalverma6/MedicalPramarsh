@@ -37,10 +37,10 @@ const Dashboard = () => {
       )}
 
       {/* Main Content */}
-      <div className='relative h-[calc(100vh-3.5rem)] w-full  overflow-auto'>
+      <div className='relative h-[calc(100vh-3.5rem)]  overflow-auto'>
         <img src={bgImage} 
         className='opacity-10 '/>
-        <div className='mx-auto w-11/12  py-10 flex flex-col absolute ml-10 -mt-[700px]'>
+        <div className='mx-auto w-11/12  py-10 flex flex-col absolute ml-10 md:-mt-[700px] -mt-[250px]'>
         
           <Outlet />
         </div>

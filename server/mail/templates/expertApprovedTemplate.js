@@ -81,7 +81,7 @@ const expertApprovedTemplate = (firstName, lastName) => {
                 <p>
                     Please log in to your dashboard to begin reviewing assigned reports.
                 </p>
-               <a href="http://localhost:5173/dashboard/home" class="cta">Go to Dashboard</a>
+               <a href="https://medicalpramarsh.com/dashboard/home" class="cta">Go to Dashboard</a>
                 <p>Thank you for being a part of <strong>Medical Pramarsh</strong>. Your expertise makes a difference.</p>
             </div>
             <div class="support">
