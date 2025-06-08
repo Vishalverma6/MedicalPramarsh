@@ -1,5 +1,5 @@
 import React from 'react'
-import Logo from '../../assets/logo.png' // adjust the path if needed
+import Logo from '../../assets/logo1.png' // adjust the path if needed
 import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa'
 
 const Footer = () => {
@@ -9,7 +9,7 @@ const Footer = () => {
 
                 {/* Logo */}
                 <div className="flex flex-col items-center mb-6 md:mb-0">
-                    <img src={Logo} alt="Medical Pramarsh Logo" className="w-12 h-12" />
+                    <img src={Logo} alt="Medical Pramarsh Logo" className="w-28 h-24" />
                     <span className="text-xl font-semibold mt-2">Medical Pramarsh</span>
                 </div>
 
