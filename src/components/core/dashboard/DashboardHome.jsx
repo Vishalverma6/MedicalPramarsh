@@ -27,7 +27,7 @@ const DashboardHome = () => {
 
   return (
     <div
-      className="min-h-screen bg-cover bg-center bg-no-repeat p-6 md:mt-36 overflow-y-hidden"
+      className="min-h-screen bg-cover bg-center bg-no-repeat p-6 md:mt-80 lg:mt-5  overflow-y-hidden"
       // style={{ backgroundImage: `url(${bgImage})` }}
     >
       {/* Dashboard Type */}

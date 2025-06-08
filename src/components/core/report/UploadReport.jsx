@@ -35,7 +35,7 @@ const UploadReport = () => {
 
 
   return (
-    <div className='max-w-xl mx-auto p-6 bg-white rounded-lg shadow-md'>
+    <div className='max-w-xl mx-auto p-6 bg-white rounded-lg md:mt-80 lg:mt-5  shadow-md'>
       <h2 className="text-2xl font-bold mb-6 text-center text-blue-700">
         Upload Medical Report
       </h2>

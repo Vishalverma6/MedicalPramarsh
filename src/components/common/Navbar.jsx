@@ -20,10 +20,11 @@ const Navbar = () => {
         <div className='flex h-14 items-center justify-center border-b-[1px] border-gray-700 bg-gradient-to-l from-blue-100 to-white'>
             <div className='flex w-11/12  items-center  md:justify-between md:px-40 gap-x-5'>
                 <Link to="/"
-                    className=' cursor-pointer mb-10 hidden md:flex'
+                    className=' cursor-pointer mb-10 hidden md:flex text-center'
                 >
-                    <img src={Logo} alt='medicalpramarsh'
-                        width={110} height={30} loading='lazy' className='cursor-pointer' />
+                    <p>Medical Pramarsh</p>
+                    {/* <img src={Logo} alt='medicalpramarsh'
+                        width={110} height={30} loading='lazy' className='cursor-pointer' /> */}
                 </Link>
 
                 {/* nav Links  */}
