@@ -38,7 +38,7 @@ const SignupForm = () => {
     event.preventDefault();
     if (formData.password !== formData.confirmPassword) {
       console.log("password do not match");
-      toast.error("Password do not matched")
+      toast.error("Password do not matched");
       return
     }
 

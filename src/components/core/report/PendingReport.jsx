@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux'; // 👈 for accessing user
 import { useNavigate } from 'react-router-dom'; // 👈 for navigation
 import { getPendingReports } from '../../../services/operations/reportAPI';
+import toast from 'react-hot-toast';
 
 const PendingReport = () => {
   const [pendingReports, setPendingReports] = useState([]);
@@ -25,7 +26,14 @@ const PendingReport = () => {
   }, []);
 
   const handleAddReview = (reportId) => {
-    navigate(`/dashboard/add-review/${reportId}`);
+    if(user?.approved ==="false"){
+      toast.error("You have not access to Add Review, wait for Admin access.");
+      return
+    }
+    else{
+      navigate(`/dashboard/add-review/${reportId}`);
+    }
+    
   };
 
   return (
