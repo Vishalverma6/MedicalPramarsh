@@ -7,6 +7,7 @@ import { VscSignOut } from 'react-icons/vsc';
 import { IoClose } from "react-icons/io5";
 import ConfirmationalModal from '../../common/ConfirmationalModal';
 import { logout } from '../../../services/operations/authAPI';
+import { ACCOUNT_TYPE } from '../../../utils/constants';
 
 const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const { user, loading: profileLoading } = useSelector((state) => state.profile);
@@ -18,6 +19,15 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
   if (authLoading || profileLoading) {
     return <div className='spinner mt-10'>Loading...</div>;
   }
+
+  const dashboardTitle =
+    user?.accountType === ACCOUNT_TYPE.PATIENT
+      ? "Patient Dashboard"
+      : user?.accountType === ACCOUNT_TYPE.EXPERT
+        ? "Expert Dashboard"
+        : user?.accountType === ACCOUNT_TYPE.ADMIN
+          ? "Admin Dashboard"
+          : "";
 
   return (
     <>
@@ -36,15 +46,25 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
           </button>
         </div>
 
+        {/* Dashboard title */}
+        {dashboardTitle && (
+          <div className='text-center mt-6 font-bold text-lg text-gray-800 bg-blue-200 mx-3 px-3 py-2 rounded-md mb-4'>
+            {dashboardTitle}
+          </div>
+        )}
+
         {/* Sidebar Links */}
         <div className="flex flex-col h-[calc(100vh-3.5rem)] py-4 px-4">
           <div className='flex flex-col gap-2'>
             {sidebarLinks.map((link) => {
               if (link.type && user.accountType !== link.type) return null;
               return (
-                <SidebarLink key={link?.id} link={link} 
-                 setIsSidebarOpen = {setIsSidebarOpen}
-                iconName={link?.icon} />
+                <SidebarLink
+                  key={link?.id}
+                  link={link}
+                  setIsSidebarOpen={setIsSidebarOpen}
+                  iconName={link?.icon}
+                />
               );
             })}
           </div>

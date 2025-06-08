@@ -30,7 +30,7 @@ const VerifyEmail = () => {
             confirmPassword,
         } = signupData;
 
-        dispatch(signup(accountType, firstName, lastName, email,contactNumber, password,
+        dispatch(signup(accountType, firstName, lastName, email, contactNumber, password,
             confirmPassword, otp, navigate));
     }
     return (
@@ -39,7 +39,7 @@ const VerifyEmail = () => {
                 {
                     loading ? (
                         <div className='spinner flex flex-col items-center justify-center '>
-                            Loading...
+                           
                         </div>
                     ) : (
                         <div className="max-w-[500px] p-4 lg:p-8 shadow-md shadow-stone-50 ">
@@ -76,8 +76,8 @@ const VerifyEmail = () => {
 
                             <div className='flex justify-between'>
                                 <div className="mt-6 flex items-center justify-between">
-                                    <Link 
-                                     onClick={navigate("/login")}
+                                    <Link
+                                        to="/login"
                                     >
                                         <p className='flex items-center gap-x-2 text-black font-semibold'>
                                             <BiArrowBack />
@@ -87,7 +87,7 @@ const VerifyEmail = () => {
                                 </div>
                                 <button
                                     className='flex items-center text-sky-900 font-semibold cursor-pointer hover:text-sky-950  gap-x-2 mt-6'
-                                onClick={() => dispatch(sendOtp(signupData.email, navigate))} 
+                                    onClick={() => dispatch(sendOtp(signupData.email,))}
                                 >
                                     Resend it
                                 </button>

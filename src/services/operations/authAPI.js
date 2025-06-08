@@ -31,7 +31,10 @@ export function sendOtp(email, navigate) {
                 throw new Error(response.data.message)
             }
             toast.success("OTP Sent Successfully")
-            navigate("/verify-email")
+            if (navigate) {
+                navigate("/verify-email")
+            }
+
         } catch (error) {
             console.log("SENDING API ERROR.....", error)
             toast.error(error?.response?.data?.message || 'Could not Send OTP')
@@ -166,8 +169,8 @@ export function resetPassword(password, confirmPassword, token, navigate) {
 }
 
 // logout
-export function logout(navigate){
-    return(dispatch) => {
+export function logout(navigate) {
+    return (dispatch) => {
         dispatch(setToken(null))
         dispatch(setUser(null));
         localStorage.removeItem("token");

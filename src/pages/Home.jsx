@@ -5,9 +5,29 @@ import medicalImage3 from "../assets/Laboratory-amico.svg"
 import medicalImage4 from "../assets/Medical care-amico.svg"
 import Footer from '../components/common/Footer';
 import medicalImage5 from "../assets/medicalConcern.svg"
+import { useSelector } from 'react-redux';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 
 const Home = () => {
+
+    const { user } = useSelector((state) => state.profile);
+    const navigate = useNavigate();
+
+    const clickHandler = (e) => {
+        if (!user) {
+            e.preventDefault();
+            toast.error("Please login first to upload report");
+            navigate("/login")
+
+        } else {
+            navigate("/dashboard/upload-report");
+        }
+    }
+
+
+
     return (
         <div className='w-full mt-6 overflow-x-hidden'>
             {/* section 1  */}
@@ -26,11 +46,12 @@ const Home = () => {
                             className=" mb-8 w-full max-w-md shadow-2xl shadow-gray-300"
                         />
                     </div>
-                    <div className="absolute inset-0 flex items-center justify-center opacity-85 -mt-24 w-full">
-                        <div className="bg-white/80 backdrop-blur-md p-6 rounded-xl shadow-lg max-w-3xl text-center z-10">
-                            <h1 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
-                                Your Trusted Digital Medical Consultation Platform
+                    <div className="absolute  inset-0 flex items-center justify-center opacity-85 -mt-[200px]  w-full">
+                        <div className="bg-white/80 backdrop-blur-md bg-gradient-to-l to-violet-100 p-6 rounded-xl shadow-lg max-w-3xl text-center z-10">
+                            <h1 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4  ">
+                                Online Medical Report Review Platform for<span className='text-red-500 opacity-75'>{" "}Second Opinion</span>
                             </h1>
+
                         </div>
                     </div>
                     <div className="flex absolute w-full  flex-col  gap-4 justify-center items-center opacity-85 bg-white/80 backdrop-blur-md p-6 rounded-xl -mt-10">
@@ -40,12 +61,15 @@ const Home = () => {
                             Submit your reports and get expert advice from top medical professionals.
                         </p>
                         <div className='flex gap-x-4'>
-                            <a
-                                href="/submit-report"
-                                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl shadow-md transition-all"
+
+                            <button
+                                onClick={clickHandler}
+                                className="bg-blue-600 cursor-pointer hover:bg-blue-700 text-white px-6 py-3 rounded-xl shadow-md transition-all"
                             >
                                 Submit Report
-                            </a>
+                            </button>
+
+
                             <a
                                 href="/signup"
                                 className="border border-blue-600 text-blue-600 hover:bg-blue-50 px-6 py-3 rounded-xl shadow-sm transition-all"
