@@ -5,6 +5,7 @@ import { apiConnector } from "../apiconnector";
 const {
     GET_PENDING_EXPERT_API,
     APPROVE_EXPERT_API,
+    GET_APPROVED_EXPERT
 } = exportEndpoints;
 
 
@@ -14,7 +15,7 @@ export const getPendingExpert = async (token) => {
     let result = [];
     try {
         const response = await apiConnector("GET", GET_PENDING_EXPERT_API, null, {
-            Authorization:`Bearer ${token}`
+            Authorization: `Bearer ${token}`
         });
 
         console.log("GET_PENDING_EXPERT_API API RESPONSE", response)
@@ -37,7 +38,7 @@ export const getPendingExpert = async (token) => {
 export const approveExpert = async (expertId, token) => {
     const toastId = toast.loading("Loading....")
     try {
-        const response = await apiConnector("POST", APPROVE_EXPERT_API, {expertId}, {
+        const response = await apiConnector("POST", APPROVE_EXPERT_API, { expertId }, {
             Authorization: `Bearer ${token}`
         })
 
@@ -52,5 +53,28 @@ export const approveExpert = async (expertId, token) => {
         console.log("APPROVE_EXPERT_API API ERROR.....", error)
         toast.error(error.message)
     }
-     toast.dismiss(toastId)
+    toast.dismiss(toastId)
+}
+
+export const getApprovedExpertList = async (token) => {
+    const toastId = toast.loading("Loading...")
+    let result = [];
+    try {
+        const response = await apiConnector("GET", GET_APPROVED_EXPERT, null, {
+            Authorization: `Bearer ${token}`
+        });
+
+        console.log("GET_APPROVED_EXPERT API RESPONSE", response)
+        if (!response.data.success) {
+            throw new Error(response?.data?.message || "Could not fetch Approved expert");
+        }
+
+        result = response?.data?.data;
+    }
+    catch (error) {
+        console.log("GET_APPROVED_EXPERT API ERROR .....", error);
+        toast.error(error.message);
+    }
+    toast.dismiss(toastId)
+    return result;
 }

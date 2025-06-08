@@ -22,221 +22,133 @@ const EditProfile = () => {
     } = useForm();
 
     const submitProfileForm = async (data) => {
-        try{
+        try {
             dispatch(updateProfile(token, data))
-        } catch(error) {
+        } catch (error) {
             console.log("ERROR MESSAGE_ ", error.message)
         }
 
     }
 
     return (
-        <form onSubmit={handleSubmit(submitProfileForm)}>
+        <form
+            onSubmit={handleSubmit(submitProfileForm)}
+            className="w-full px-4 sm:px-6 md:px-8 flex flex-col items-center "
+        >
+            <div className="w-full max-w-[90rem] flex flex-col gap-y-6 rounded-md bg-gray-700 border border-gray-600 px-4 py-6 sm:px-6 sm:py-7 md:px-10 md:py-8">
+                <h2 className="text-lg md:text-xl font-semibold text-gray-50">Profile Information</h2>
 
-            {/* profile information */}
-            <div className='w-9/12 flex flex-col gap-y-6 rounded-md bg-gray-700 border-[1px] border-gray-600 px-10 p-7'>
-                <h2 className="text-lg font-semibold text-gray-50">
-                    Profile Information
-                </h2>
-
-                {/* first Name and last Name  */}
-                <div className='flex flex-col gap-5 lg:flex-row'>
-                    {/* first Name */}
-                    <div className='flex flex-col gap-2 lg:w-[48%] '>
-                        <label
-                            className='text-[14px] text-gray-100 font-semibold'
-                            htmlFor='firstName'>
-                            First Name
-                        </label>
+                {/* First and Last Name */}
+                <div className="flex flex-col md:flex-row gap-5">
+                    <div className="flex flex-col gap-2 w-full md:w-1/2">
+                        <label htmlFor="firstName" className="text-sm text-gray-100 font-semibold">First Name</label>
                         <input
-                            type='text'
-                            name='firstName'
-                            id='firstName'
-                            placeholder='Enter first name'
-                            className='rounded-lg bg-gray-500 p-3 text-[16px] leading-[18px] text-gray-50  shadow-[0_1px_0_0] shadow-white/50 placeholder:text-gray-400 focus:outline-none '
                             {...register("firstName", { required: true })}
                             defaultValue={user?.firstName}
+                            type="text"
+                            id="firstName"
+                            className="rounded-lg bg-gray-500 p-3 text-gray-50 placeholder:text-gray-400 focus:outline-none"
+                            placeholder="Enter first name"
                         />
-                        {errors.firstName && (
-                            <span className='-mt-1 text-[12px] text-yellow-400'>
-                                Please enter Your First Name
-                            </span>
-                        )}
+                        {errors.firstName && <span className="text-xs text-yellow-400">Please enter Your First Name</span>}
                     </div>
 
-                    {/* last Name  */}
-                    <div className="flex flex-col gap-2 lg:w-[48%]">
-                        <label htmlFor='lastName'
-                            className='text-[14px] text-gray-100 font-semibold'
-                        >
-                            Last Name
-                        </label>
+                    <div className="flex flex-col gap-2 w-full md:w-1/2">
+                        <label htmlFor="lastName" className="text-sm text-gray-100 font-semibold">Last Name</label>
                         <input
-                            type='text'
-                            name='lastName'
-                            id='lastName'
-                            placeholder='Enter Last Name'
-                            className='rounded-lg bg-gray-500 p-3 text-[16px] leading-[18px] text-gray-50  shadow-[0_1px_0_0] shadow-white/50 placeholder:text-gray-400 focus:outline-none '
                             {...register("lastName")}
                             defaultValue={user?.lastName}
+                            type="text"
+                            id="lastName"
+                            className="rounded-lg bg-gray-500 p-3 text-gray-50 placeholder:text-gray-400 focus:outline-none"
+                            placeholder="Enter Last Name"
                         />
-                        {/* {
-                            errors.lastName && (
-                                <span className='-mt-1 text-[12px] text-yellow-400'>
-                                    Please enter your Last Name
-                                </span>
-                            )
-                        } */}
                     </div>
                 </div>
 
-                {/* Date of Birth And gender */}
-                <div className='flex flex-col gap-5 lg:flex-row'>
-                    {/* for date of birth */}
-                    <div className='flex flex-col gap-2 lg:w-[48%]'>
-                        <label htmlFor="dateOfBirth"
-                            className='text-[14px] font-semibold text-gray-100'>
-                            Date of Birth
-                        </label>
+                {/* DOB and Gender */}
+                <div className="flex flex-col md:flex-row gap-5">
+                    <div className="flex flex-col gap-2 w-full md:w-1/2">
+                        <label htmlFor="dateOfBirth" className="text-sm text-gray-100 font-semibold">Date of Birth</label>
                         <input
-                            type='date'
-                            name='dateOfBirth'
-                            id='dateOfBirth'
-                            className='rounded-lg bg-gray-500 p-3 cursor-pointer text-[16px] leading-[18px] text-gray-50  shadow-[0_1px_0_0] shadow-white/50 placeholder:text-gray-400 focus:outline-none '
                             {...register("dateOfBirth", {
-                                required: {
-                                    value: true,
-                                    message: "Please enter your Date of Birth .",
-                                },
-                                max: {
-                                    value: new Date().toISOString().split("T")[0],
-                                    message: "date of Birth cannot be in future",
-                                },
+                                required: { value: true, message: "Please enter your Date of Birth." },
+                                max: { value: new Date().toISOString().split("T")[0], message: "Date of Birth cannot be in future" }
                             })}
                             defaultValue={user?.additionalDetails?.dateOfBirth}
+                            type="date"
+                            id="dateOfBirth"
+                            className="rounded-lg bg-gray-500 p-3 text-gray-50 placeholder:text-gray-400 focus:outline-none"
                         />
-                        {
-                            errors.dateOfBirth && (
-                                <span className='-mt-1 text-[12px] text-red-500'>
-                                    {errors.dateOfBirth.message}
-                                </span>
-                            )
-                        }
+                        {errors.dateOfBirth && <span className="text-xs text-red-500">{errors.dateOfBirth.message}</span>}
                     </div>
 
-                    {/* For Gender */}
-                    <div className='flex flex-col gap-2 lg:w-[48%]' >
-                        <label htmlFor="gender"
-                            className='text-[14px] font-semibold text-gray-100'>
-                            Gender
-                        </label>
+                    <div className="flex flex-col gap-2 w-full md:w-1/2">
+                        <label htmlFor="gender" className="text-sm text-gray-100 font-semibold">Gender</label>
                         <select
-                            type='text'
-                            name='gender'
-                            id='gender'
-                            className='rounded-lg bg-gray-500 p-3 text-[16px] leading-[18px] text-gray-50  shadow-[0_1px_0_0] shadow-white/50 cursor-pointer placeholder:text-gray-400 focus:outline-none '
                             {...register("gender", { required: true })}
                             defaultValue={user?.additionalDetails?.gender}
+                            id="gender"
+                            className="rounded-lg bg-gray-500 p-3 text-gray-50 placeholder:text-gray-400 focus:outline-none"
                         >
-                            {
-                                genders.map((ele, index) => {
-                                    return (
-                                        <option key={index} value={ele}>
-                                            {ele}
-                                        </option>
-                                    )
-                                })
-                            }
+                            {genders.map((ele, i) => (
+                                <option key={i} value={ele}>{ele}</option>
+                            ))}
                         </select>
-                        {
-                            errors.gender && (
-                                <span className='-mt-1 text-[12px] text-red-500'>
-                                    Please select Your Gender
-                                </span>
-                            )
-                        }
+                        {errors.gender && <span className="text-xs text-red-500">Please select Your Gender</span>}
                     </div>
                 </div>
 
-                {/* Contact Number and About */}
-                <div className='flex flex-col gap-5 lg:flex-row'>
-                    {/* contact number */}
-                    <div className='flex flex-col gap-2 lg:w-[48%]'>
-                        <label htmlFor="contactNumber" className='text-[14px] font-semibold text-gray-100'>
-                            Contact Number
-                        </label>
+                {/* Contact and About */}
+                <div className="flex flex-col md:flex-row gap-5">
+                    <div className="flex flex-col gap-2 w-full md:w-1/2">
+                        <label htmlFor="contactNumber" className="text-sm text-gray-100 font-semibold">Contact Number</label>
                         <input
-                            type='tel'
-                            name='contactNumber'
-                            id='contactNumber'
-                            className='rounded-lg bg-gray-500 p-3 text-[16px] leading-[18px] text-gray-50  shadow-[0_1px_0_0] shadow-white/50 placeholder:text-gray-400 focus:outline-none '
-                            placeholder='Enter Contact Number'
                             {...register("contactNumber", {
-                                required: {
-                                    value: true,
-                                    message: "Please enter your Contact Number .",
-                                },
-                                maxLength: { value: 12, message: "Invalid Contact Number" },
+                                required: { value: true, message: "Please enter your Contact Number." },
                                 minLength: { value: 10, message: "Invalid Contact Number" },
+                                maxLength: { value: 12, message: "Invalid Contact Number" }
                             })}
                             defaultValue={user?.contactNumber}
+                            type="tel"
+                            id="contactNumber"
+                            className="rounded-lg bg-gray-500 p-3 text-gray-50 placeholder:text-gray-400 focus:outline-none"
+                            placeholder="Enter Contact Number"
                         />
-                        {
-                            errors.contactNumber && (
-                                <span className='-mt-1 text-[12px] text-yellow-50'>
-                                    {errors.contactNumber.message}
-                                </span>
-                            )
-                        }
+                        {errors.contactNumber && <span className="text-xs text-yellow-50">{errors.contactNumber.message}</span>}
                     </div>
 
-                    {/* About */}
-                    <div className='flex flex-col gap-2 lg:w-[48%]'>
-                        <label htmlFor="about" className='text-[14px] font-semibold text-gray-100'>
-                            About
-                        </label>
+                    <div className="flex flex-col gap-2 w-full md:w-1/2">
+                        <label htmlFor="about" className="text-sm text-gray-100 font-semibold">About</label>
                         <input
-                            type='text'
-                            name='about'
-                            id='about'
-                            className='rounded-lg bg-gray-500 p-3 text-[16px] leading-[18px] text-gray-50  shadow-[0_1px_0_0] shadow-white/50 placeholder:text-gray-400 focus:outline-none '
-                            placeholder='Enter Bio details'
                             {...register("about", {
-                                required: {
-                                    value: true,
-                                    message: "Please enter your About .",
-                                },
+                                required: { value: true, message: "Please enter your About." }
                             })}
                             defaultValue={user?.additionalDetails?.about}
+                            type="text"
+                            id="about"
+                            className="rounded-lg bg-gray-500 p-3 text-gray-50 placeholder:text-gray-400 focus:outline-none"
+                            placeholder="Enter Bio details"
                         />
-                        {
-                            errors.about && (
-                                <span className='-mt-1 text-[12px] font-semibold text-red-500'>
-                                    {errors.about.message}
-                                </span>
-                            )
-                        }
+                        {errors.about && <span className="text-xs font-semibold text-red-500">{errors.about.message}</span>}
                     </div>
                 </div>
             </div>
 
-            <div className='flex gap-2 justify-end w-9/12 mt-6'>
+            {/* Buttons */}
+            <div className="flex flex-col sm:flex-row justify-end items-center gap-3 w-full max-w-[90rem] mt-6">
                 <button
-                    onClick={() => {
-                        navigate("/dashboard/my-profile")
-                    }}
-                    className='bg-gray-500 rounded-md py-2 px-3
-                     font-semibold text-gray-50 cursor-pointer
-                      '
+                    type="button"
+                    onClick={() => navigate("/dashboard/my-profile")}
+                    className="bg-gray-500 text-white px-4 py-2 rounded-md font-semibold"
                 >
                     Cancel
                 </button>
-                <IconBtn
-                    text="Save"
-                    type="submit"
-                />
+                <IconBtn text="Save" type="submit" />
             </div>
         </form>
+
+
     )
 }
 

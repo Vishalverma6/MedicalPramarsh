@@ -40,4 +40,5 @@ export const reportEndpoints = {
 export const exportEndpoints = {
     GET_PENDING_EXPERT_API : BASE_URL + "/expert/get-pending-expert",
     APPROVE_EXPERT_API: BASE_URL + "/expert/approve-expert",
+    GET_APPROVED_EXPERT :BASE_URL + "/expert/get-approved-expert",
 }

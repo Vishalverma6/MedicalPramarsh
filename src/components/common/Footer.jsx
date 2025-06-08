@@ -17,20 +17,45 @@ const Footer = () => {
                 <div className="text-center">
                     <p className="mb-3 font-medium">STAY IN TOUCH</p>
                     <div className="flex space-x-4 justify-center">
-                        <a href="#" aria-label="Instagram" className="bg-white shadow-md hover:shadow-lg p-3 rounded-full transition">
+                        <a
+                            href="https://www.instagram.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Instagram"
+                            className="bg-white shadow-md hover:shadow-lg p-3 rounded-full transition"
+                        >
                             <FaInstagram className="text-pink-500 text-xl" />
                         </a>
-                        <a href="#" aria-label="Facebook" className="bg-white shadow-md hover:shadow-lg p-3 rounded-full transition">
+                        <a
+                            href="https://www.facebook.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Facebook"
+                            className="bg-white shadow-md hover:shadow-lg p-3 rounded-full transition"
+                        >
                             <FaFacebook className="text-blue-600 text-xl" />
                         </a>
-                        <a href="#" aria-label="Twitter" className="bg-white shadow-md hover:shadow-lg p-3 rounded-full transition">
+                        <a
+                            href="https://www.twitter.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Twitter"
+                            className="bg-white shadow-md hover:shadow-lg p-3 rounded-full transition"
+                        >
                             <FaTwitter className="text-sky-500 text-xl" />
                         </a>
-                        <a href="#" aria-label="YouTube" className="bg-white shadow-md hover:shadow-lg p-3 rounded-full transition">
+                        <a
+                            href="https://www.youtube.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="YouTube"
+                            className="bg-white shadow-md hover:shadow-lg p-3 rounded-full transition"
+                        >
                             <FaYoutube className="text-red-600 text-xl" />
                         </a>
                     </div>
                 </div>
+
             </div>
 
             <div className="mt-6 text-center text-sm text-gray-600">

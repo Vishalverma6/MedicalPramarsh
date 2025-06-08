@@ -81,7 +81,14 @@ export const sidebarLinks = [
         name: "Pending Reports",
         path: "/dashboard/pending-report",
         type:  ACCOUNT_TYPE.ADMIN,
-        icon: "VscDashboard"
+        icon: "VscFilePdf"
+    },
+    {
+        id: 7,
+        name: "Approved Experts",
+        path: "/dashboard/approved-expert",
+        type:  ACCOUNT_TYPE.ADMIN,
+        icon: "VscVerifiedFilled"
     },
 
 ]

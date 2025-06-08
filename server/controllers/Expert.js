@@ -1,3 +1,4 @@
+const { data } = require("react-router-dom");
 const expertApprovedTemplate = require("../mail/templates/expertApprovedTemplate");
 const User = require("../models/User");
 const mailSender = require("../utils/mailSender");
@@ -67,6 +68,33 @@ exports.approveExpert = async (req, res) => {
         return res.status(500).json({
             success: false,
             message: "Failed to approve Expert, server error",
+        });
+    }
+}
+
+exports.getApprovedExpert = async (req, res) => {
+    try {
+        const approvedExperts = await User.find({ approved: true, accountType: "Expert" }).select("-password");
+
+        // validation
+        if (!approvedExperts) {
+            return res.status(404).json({
+                success: false,
+                message: "No Approved expert found",
+            })
+        }
+
+        // return response 
+        return res.status(200).json({
+            success: true,
+            data: approvedExperts,
+        })
+    }
+    catch (error) {
+        console.error("Error fetching approved experts:", error);
+        return res.status(500).json({
+            success: false,
+            message: "Failed to fetch approved experts",
         });
     }
 }

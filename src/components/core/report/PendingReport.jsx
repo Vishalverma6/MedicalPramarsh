@@ -26,15 +26,14 @@ const PendingReport = () => {
   }, []);
 
   const handleAddReview = (reportId) => {
-    if(user?.approved ==="false"){
-      toast.error("You have not access to Add Review, wait for Admin access.");
-      return
-    }
-    else{
+    if (user?.approved === false) {
+      toast.error("You do not have access to add a review. Please wait for admin approval.");
+      return;
+    } else {
       navigate(`/dashboard/add-review/${reportId}`);
     }
-    
   };
+
 
   return (
     <div className="p-4 flex flex-col md:p-8 bg-gradient-to-br from-green-100 shadow-2xl shadow-black ">

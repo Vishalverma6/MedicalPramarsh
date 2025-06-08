@@ -85,6 +85,7 @@ const VerifyEmail = () => {
                                         </p>
                                     </Link>
                                 </div>
+                                
                                 <button
                                     className='flex items-center text-sky-900 font-semibold cursor-pointer hover:text-sky-950  gap-x-2 mt-6'
                                     onClick={() => dispatch(sendOtp(signupData.email,))}

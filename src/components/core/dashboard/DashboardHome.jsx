@@ -6,11 +6,28 @@ import bgImage from "../../../assets/bg-dashboard.jpg";
 const DashboardHome = () => {
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.profile);
-  console.log("user22", user)
+
+  const handleFirstAction = () => {
+    if (user?.accountType === "Patient") navigate("/dashboard/upload-report");
+    else if (user?.accountType === "Expert") navigate("/dashboard/pending-report");
+    else if (user?.accountType === "Admin") navigate("/dashboard/pending-expert");
+  };
+
+  const handleSecondAction = () => {
+    if (user?.accountType === "Patient") navigate("/dashboard/consult-expert");
+    else if (user?.accountType === "Expert") navigate("/dashboard/previous-reviewed-report");
+    else if (user?.accountType === "Admin") navigate("/dashboard/approved-expert");
+  };
+
+  const handleThirdAction = () => {
+    if (user?.accountType === "Patient") navigate("/dashboard/consultations");
+    else if (user?.accountType === "Expert") navigate("/dashboard/pending-reports");
+    else if (user?.accountType === "Admin") navigate("/dashboard/pending-report");
+  };
 
   return (
     <div
-      className="min-h-screen bg-cover bg-center bg-no-repeat p-6"
+      className="min-h-screen bg-cover bg-center bg-no-repeat p-6 md:mt-36 overflow-y-hidden"
       // style={{ backgroundImage: `url(${bgImage})` }}
     >
       {/* Dashboard Type */}
@@ -46,7 +63,10 @@ const DashboardHome = () => {
 
       {/* Action Buttons */}
       <div className="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
-        <button className="bg-blue-600 text-white px-6 py-2 rounded-xl hover:bg-blue-700 transition">
+        <button
+          onClick={handleFirstAction}
+          className="bg-blue-600 cursor-pointer text-white px-6 py-2 rounded-xl hover:bg-blue-700 transition"
+        >
           {
             user?.accountType === "Patient"
               ? "Upload Report"
@@ -57,23 +77,31 @@ const DashboardHome = () => {
                   : ""
           }
         </button>
-        <button className="bg-green-600 text-white px-6 py-2 rounded-xl hover:bg-green-700 transition">
+
+        <button
+          onClick={handleSecondAction}
+          className="bg-green-600 cursor-pointer text-white px-6 py-2 rounded-xl hover:bg-green-700 transition"
+        >
           {
             user?.accountType === "Patient"
               ? "Consult an Expert"
               : user?.accountType === "Expert"
-                ? "Add Review"
+                ? "Previous Reviewed Report"
                 : user?.accountType === "Admin"
                   ? "Approve Expert"
                   : ""
           }
         </button>
-        <button className="bg-gray-600 text-white px-6 py-2 rounded-xl hover:bg-gray-700 transition">
+
+        <button
+          onClick={handleThirdAction}
+          className="bg-gray-600 cursor-pointer text-white px-6 py-2 rounded-xl hover:bg-gray-700 transition"
+        >
           {
             user?.accountType === "Patient"
               ? "View Past Consultations"
               : user?.accountType === "Expert"
-                ? "View Pending Report"
+                ? ""
                 : user?.accountType === "Admin"
                   ? "Pending Report"
                   : ""

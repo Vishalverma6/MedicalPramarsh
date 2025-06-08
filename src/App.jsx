@@ -30,6 +30,7 @@ import { ACCOUNT_TYPE } from './utils/constants'
 import PendingReport from './components/core/report/PendingReport'
 import AddReview from './components/core/report/AddReview'
 import ReviewedReport from './components/core/report/ReviewedReport'
+import ApprovedExpert from './components/core/expert/ApprovedExpert'
 
 function App() {
   const { user } = useSelector((state) => state.profile);
@@ -130,6 +131,7 @@ function App() {
                 <>
                   <Route path='/dashboard/pending-report' element={<PendingReport />} />
                   <Route path='/dashboard/previous-reviewed-report' element={<ReviewedReport />} />
+                  <Route path='/dashboard/approved-expert' element={<ApprovedExpert/>}/>
                 </>
 
               )
