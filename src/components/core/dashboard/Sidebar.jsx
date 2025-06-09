@@ -92,7 +92,7 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
             }
             className='mt-auto cursor-pointer text-left px-4 text-sm font-semibold text-gray-600'
           >
-            <div className='flex items-center gap-2'>
+            <div className='flex items-center gap-2 mb-56 ml-4'>
               <VscSignOut className='text-lg' />
               <span className='text-lg'>Logout</span>
             </div>
