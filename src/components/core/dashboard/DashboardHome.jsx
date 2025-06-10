@@ -21,14 +21,14 @@ const DashboardHome = () => {
 
   const handleThirdAction = () => {
     if (user?.accountType === "Patient") navigate("/dashboard/consultations");
-    else if (user?.accountType === "Expert") navigate("/dashboard/pending-reports");
+    // else if (user?.accountType === "Expert") navigate("/dashboard/pending-reports");
     else if (user?.accountType === "Admin") navigate("/dashboard/pending-report");
   };
 
   return (
     <div
       className="min-h-screen bg-cover bg-center bg-no-repeat p-6 md:mt-80 lg:mt-5  overflow-y-hidden"
-      // style={{ backgroundImage: `url(${bgImage})` }}
+    // style={{ backgroundImage: `url(${bgImage})` }}
     >
       {/* Dashboard Type */}
       <div className="bg-white/80 rounded-xl shadow-md p-4 max-w-xl mx-auto mb-8">
@@ -97,15 +97,14 @@ const DashboardHome = () => {
           onClick={handleThirdAction}
           className="bg-gray-600 cursor-pointer text-white px-6 py-2 rounded-xl hover:bg-gray-700 transition"
         >
-          {
-            user?.accountType === "Patient"
-              ? "View Past Consultations"
-              : user?.accountType === "Expert"
-                ? ""
-                : user?.accountType === "Admin"
-                  ? "Pending Report"
-                  : ""
-          }
+          {user?.accountType === "Patient" && (
+            <div>View Past Consultations</div>
+          )}
+
+          {user?.accountType === "Admin" && (
+            <div>Pending Report</div>
+          )}
+
         </button>
       </div>
     </div>

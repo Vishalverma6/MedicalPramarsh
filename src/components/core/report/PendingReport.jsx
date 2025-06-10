@@ -95,8 +95,8 @@ const PendingReport = () => {
                 {pendingReports.map((report, index) => (
                   <tr key={report._id} className="text-center text-sm">
                     <td className="py-2 px-4 border">{index + 1}</td>
-                    <td className="py-2 px-4 border">{report.patient?.email || "N/A"}</td>
-                    <td className="py-2 px-4 border">{report.phoneNumber}</td>
+                    <td className="py-2 px-4 border">{user?.approved === falsereport.patient?.email || "N/A"}</td>
+                    <td className="py-2 px-4 border">{user?.approved === false ? "**********":`${report.phoneNumber}`}</td>
                     <td className="py-2 px-4 border">{report.reportType}</td>
                     <td className="py-2 px-4 border">
                       <a

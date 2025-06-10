@@ -49,7 +49,7 @@ const Navbar = () => {
                 </nav>
 
                 {/* Signup And login Button */}
-                <div className='flex gap-x-1 md:gap-x-4'>
+                <div className='flex gap-x-3 md:gap-x-4'>
                     {
                         token === null && (
                             <Link to="/login">
