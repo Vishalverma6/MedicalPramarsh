@@ -259,7 +259,7 @@ exports.addReviewToReport = async (req, res) => {
 // get pending reports
 exports.getPendingReports = async (req, res) => {
     try {
-        const reports = await Report.find({ status: "Pending" }).populate("patient", "name email");
+        const reports = await Report.find({ status: "Pending" }).populate("patient", "firstName lastName email");
 
         return res.status(200).json({
             success: true,
