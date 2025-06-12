@@ -21,6 +21,7 @@ const PendingReport = () => {
     }
   };
 
+  console.log("pending reports ", pendingReports)
   useEffect(() => {
     fetchPendingReports();
   }, []);
@@ -51,8 +52,8 @@ const PendingReport = () => {
             {pendingReports.map((report, index) => (
               <div key={report._id} className="bg-white rounded-lg shadow-md p-4 border border-gray-300">
                 <p className="text-sm text-gray-500">#{index + 1}</p>
-                <p><span className="font-semibold">Email:</span> {report.patient?.email || "N/A"}</p>
-                <p><span className="font-semibold">Phone:</span> {report.phoneNumber}</p>
+                <p><span className="font-semibold">Name:</span> {user?.approved === false ? "******":`${report.patient?.firstName } ${report.patient?.lastName }` || "N/A"}</p>
+                <p><span className="font-semibold">Phone:</span>{user?.approved === false ? "**********":`${report.phoneNumber}`}</p>
                 <p><span className="font-semibold">Type:</span> {report.reportType}</p>
                 <p>
                   <span className="font-semibold">Link:</span>{" "}
@@ -81,7 +82,7 @@ const PendingReport = () => {
               <thead>
                 <tr className="bg-gray-100 text-sm">
                   <th className="py-2 px-4 border">#</th>
-                  <th className="py-2 px-4 border">Patient Email</th>
+                  <th className="py-2 px-4 border">Patient Name</th>
                   <th className="py-2 px-4 border">Phone</th>
                   <th className="py-2 px-4 border">Report Type</th>
                   <th className="py-2 px-4 border">Report Link</th>
@@ -95,7 +96,7 @@ const PendingReport = () => {
                 {pendingReports.map((report, index) => (
                   <tr key={report._id} className="text-center text-sm">
                     <td className="py-2 px-4 border">{index + 1}</td>
-                    <td className="py-2 px-4 border">{user?.approved === false ? "*******@gmail.com" : `${report.patient?.email}` || "N/A"}</td>
+                    <td className="py-2 px-4 border">{user?.approved === false ? "******":`${report.patient?.firstName } ${report.patient?.lastName }` || "N/A"}</td>
                     <td className="py-2 px-4 border">{user?.approved === false ? "**********":`${report.phoneNumber}`}</td>
                     <td className="py-2 px-4 border">{report.reportType}</td>
                     <td className="py-2 px-4 border">
